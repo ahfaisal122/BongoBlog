@@ -1,0 +1,47 @@
+create table User_table(
+    User_id varchar(25),
+    Password varchar(25),
+    primary key(User_id)
+    );
+
+create table Blog(
+    Blog_id int auto_increment,
+    Blog_title varchar(50),
+    Blog_text text,
+    User_id varchar(25),
+    Comment_id int,
+    Blog_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    primary key(Blog_id),
+    cat_id int
+    );
+
+create table Comment(
+    Comment_id int auto_increment,
+    Comment_text text,
+    User_id varchar(25),
+    Blog_id int,
+    primary key(Comment_id)
+    );
+
+create table category(
+    cat_id int,
+    Cat_title varchar(30),
+    Cat_desc varchar(200),
+    primary key(Cat_id)
+    );
+
+
+
+ALTER TABLE Blog
+ADD FOREIGN KEY (user_id) REFERENCES user_table(user_id);
+
+ALTER TABLE blog
+ADD FOREIGN KEY (comment_id) REFERENCES comment(comment_id);
+
+ALTER TABLE comment
+ADD FOREIGN KEY (User_id) REFERENCES user_table(User_id);
+
+ALTER TABLE comment
+ADD FOREIGN KEY (Blog_id) REFERENCES blog(Blog_id);
+alter table blog;
+add foreign key (cat_id) references category(cat_id);
